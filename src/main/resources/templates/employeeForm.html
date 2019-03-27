@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-CN" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>hello</title>
+</head>
+<body>
+
+<!--/*@thymesVar id="name" type="java.lang.String"*/-->
+
+
+
+<form action="#" th:action="@{/employee/{action}(action=${action})}" th:object="${employee}" method="post">
+    <label for="id" class="col-sm-2 control-label">id:</label>
+    <input id="id" type="number" th:field="*{employeeId}" required />
+
+
+    <label for="firstName" class="col-sm-2 control-label">姓:</label>
+    <input id="firstName" type="text" th:field="*{firstName}" required />
+
+    <label for="LastName" class="col-sm-2 control-label">名:</label>
+    <input id="LastName" type="text" th:field="*{lastName}" required />
+
+    <label for="gender" class="col-sm-2 control-label">性别:</label>
+    <input id="gender" type="text" th:field="*{gender}" required />
+
+    <label for="birthDate" class="col-sm-2 control-label">生日:</label>
+    <input id="birthDate" type="date" th:field="*{birthDate}" required />
+
+    <label for="educationLevel" class="col-sm-2 control-label">学历:</label>
+    <input id="educationLevel" type="text" th:field="*{educationLevel}" required />
+
+    <label for="maritalStatus" class="col-sm-2 control-label">婚姻状况:</label>
+    <input id="maritalStatus" type="text" th:field="*{maritalStatus}" required />
+
+    <label for="salary" class="col-sm-2 control-label">工资:</label>
+    <input id="salary" type="number" th:field="*{salary}" required />
+
+    <label for="storeId" class="col-sm-2 control-label">商店id:</label>
+    <input id="storeId" type="text" th:field="*{storeId}" required />
+
+    <label for="departmentId" class="col-sm-2 control-label">部门id:</label>
+    <input id="departmentId" type="text" th:field="*{departmentId}" required />
+
+    <label for="hireDate" class="col-sm-2 control-label">雇佣时间:</label>
+    <input id="hireDate" type="datetime" th:field="*{hireDate}" required />
+
+    <label for="endDate" class="col-sm-2 control-label">结束时间:</label>
+    <input id="endDate" type="datetime" th:field="*{endDate}" required />
+
+    <input type="submit"/>
+    <input class="btn" type="button" value="返回" onclick="history.back()"/>
+</form>
+
+
+
+
+</body>
+
+
+
+</html>
