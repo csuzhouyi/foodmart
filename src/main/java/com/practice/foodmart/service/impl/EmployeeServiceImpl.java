@@ -5,9 +5,6 @@ import com.practice.foodmart.pojo.Employee;
 import com.practice.foodmart.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.math.BigDecimal;
-import java.sql.Timestamp;
 import java.util.List;
 
 /**
@@ -40,9 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public boolean createEmployee(Employee employee) throws Exception {
         if (employee != null && selectById(employee.getEmployeeId()) != null)
             return false;
-
         employee.setFullName(employee.getFirstName() + " " + employee.getLastName());
-
         return employeeMapper.insertEmployee(employee);
     }
 
