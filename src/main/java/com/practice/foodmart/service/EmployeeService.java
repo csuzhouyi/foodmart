@@ -1,5 +1,6 @@
 package com.practice.foodmart.service;
 
+import com.github.pagehelper.PageInfo;
 import com.practice.foodmart.pojo.Employee;
 
 import java.util.List;
@@ -20,4 +21,6 @@ public interface EmployeeService {
     boolean createEmployee(Employee employee) throws Exception;
 
     boolean update(Employee employee) throws Exception;
+
+    PageInfo<Employee> search(String idStr, int pageIndex, int pageSize) throws Exception;
 }

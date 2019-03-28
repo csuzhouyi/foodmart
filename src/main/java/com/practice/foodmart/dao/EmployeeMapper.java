@@ -62,4 +62,7 @@ public interface EmployeeMapper {
             "gender=#{gender},   where employee_id=#{employeeId}")
     boolean update(Employee employee) throws Exception;
 
+    @Select("select count(0) from employee")
+    int count() throws Exception;
+
 }
