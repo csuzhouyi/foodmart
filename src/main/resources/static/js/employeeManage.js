@@ -69,7 +69,7 @@ function fire_ajax_submit() {
                 $('#errorMessage').on('show.bs.modal', function (event) {
                     var modal = $(this);
                     modal.find('.modal-body').text(msg);
-                })
+                });
                 $('#errorMessage').modal({
                     backdrop: false,
                     keyboard: false,
@@ -124,10 +124,10 @@ function deleteEmployee(id, callback) {
         cache: false,
         timeout: 600000,
         success: function (data) {
-            alert(data.msg);
             if (data.msg == 'delete complete') {
                 callback && callback();
             }
+            alert(data.msg);
         },
         error: function (e) {
             alert("errorInfo: " + e);
@@ -139,4 +139,86 @@ function modifyEmployee() {
 
     alert("modify");
 
+}
+
+function createEmployeeModel() {
+
+    $('#create_modal').on('show.bs.modal', function (event) {
+        var modal = $(this);
+
+        modal.find('.modal-title').text("新增员工");
+
+
+    });
+    $('#create_modal').modal({
+        backdrop: false,
+        keyboard: false,
+        show: true
+    });
+}
+
+function check_form() {
+    var employeeId = document.getElementById("model_employee_id").value;
+    var firstName = document.getElementById("model_first_name").value;
+    var lastName = document.getElementById("model_last_name").value;
+    var gender = document.getElementById("model_gender").value;
+    var birthDate = document.getElementById("model_birth_date").value;
+    var educationLevel = document.getElementById("model_education_level").value;
+    var maritalStatus = document.getElementById("model_marital_status").value;
+    var salary = document.getElementById("model_salary").value;
+    var storeId = document.getElementById("model_store_id").value;
+    var departmentId = document.getElementById("model_department_id").value;
+    var hireDate = document.getElementById("model_hire_date").value;
+    var endDate = document.getElementById("model_end_date").value;
+
+    var employee = {};
+    employee.employeeId = employeeId;
+    employee.firstName = firstName;
+    employee.lastName = lastName;
+    employee.gender = gender;
+    employee.birthDate = birthDate;
+    employee.educationLevel = educationLevel;
+    employee.maritalStatus = maritalStatus;
+    employee.salary = salary;
+    employee.storeId = storeId;
+    employee.departmentId = departmentId;
+    employee.hireDate = hireDate;
+    employee.endDate = endDate;
+    employee.fullName = firstName + " " + lastName;
+
+    if (document.getElementById("modal_type").innerText == "新增员工") {
+        createEmployee(employee, fire_ajax_submit);
+    }
+
+
+}
+
+function createEmployee(employee, callback) {
+    $.ajax({
+        type: "POST",
+        contentType: "application/json",
+        url: "/newEmployeeManage/create",
+        data: JSON.stringify(employee),
+        dataType: 'json',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            var msg = data["msg"];
+            console.log("SUCCESS : ", data);
+            if (msg == "success") {
+                callback && callback();
+                alert("添加成功");
+            } else {
+                alert('添加失败');
+            }
+        },
+        error: function (e) {
+            var json = "<h4>error</h4><pre>"
+                + e.responseText + "</pre>";
+            $('#feedback').html(json);
+            console.log("ERROR : ", e);
+            alert("ERROR : ", e);
+
+        }
+    });
 }
