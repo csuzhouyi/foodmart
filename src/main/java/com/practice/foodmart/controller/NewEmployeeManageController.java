@@ -9,10 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.ListUtils;
 
 import javax.validation.Valid;
@@ -61,6 +58,27 @@ public class NewEmployeeManageController {
         result.setResult(pageInfo);
         return ResponseEntity.ok(result);
 
+    }
+
+    /**
+     * 删除员工
+     * @param id
+     * @return
+     */
+    @GetMapping(value = "/delete/{id}")
+    public ResponseEntity<?> delete(@PathVariable int id) {
+        AjaxResponseBody result = new AjaxResponseBody();
+        try {
+            if (employeeService.deleteById(id)) {
+                result.setMsg("delete complete");
+            } else {
+                result.setMsg("delete fail");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg("ERROR INFO: " + e);
+        }
+        return ResponseEntity.ok(result);
     }
 
 }

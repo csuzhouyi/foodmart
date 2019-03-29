@@ -10,6 +10,7 @@ $(document).ready(function () {
     });
 
 });
+
 var currentPage = "1";
 var pageSize = "15";
 function fire_ajax_submit() {
@@ -44,13 +45,20 @@ function fire_ajax_submit() {
                     "         <th>生日</th>\n" +
                     "         <th>学历</th>\n" +
                     "         <th>婚姻状况</th>\n" +
+                    "         <th>管理</th>\n" +
                     "      </tr>\n" +
                     "   </thead>\n" +
                     "   <tbody>\n";
                 for (i in result.list) {
                     ei += "<tr>\n         <td>" + result.list[i]["employeeId"] + "</td>\n         <td>" + result.list[i]["fullName"]
                         + "</td>\n         <td>" + result.list[i]["gender"] + "</td>\n         <td>" + result.list[i]["birthDate"]
-                        + "</td>\n         <td>" + result.list[i]["educationLevel"] + "</td>\n         <td>" + result.list[i]["maritalStatus"] + "</td>\n      </tr>\n";
+                        + "</td>\n         <td>" + result.list[i]["educationLevel"] + "</td>\n         <td>" + result.list[i]["maritalStatus"];
+                    ei += "<td style=\"white-space:nowrap\">\n" +
+                        "\t\t<div class=\"btn-group\">\n" +
+                        "\t\t\t<button type=\"button\" class=\"btn btn-default\" onclick=\"deleteEmployee(" + result.list[i]["employeeId"] + ", fire_ajax_submit)\">删除</button>\n" +
+                        "\t\t\t<button type=\"button\" class=\"btn btn-default\" onclick=\"modifyEmployee()\">修改</button>\n" +
+                        "\t\t</div>\n" +
+                        "\t</td>\n      </tr>\n";
                 }
                 ei += "   </tbody>\n" +
                     "</table>\n";
@@ -104,4 +112,31 @@ function setPage(pageCurrent, pageSum, callback) {
             callback && callback()
         }
     })
+}
+
+function deleteEmployee(id, callback) {
+
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: "/newEmployeeManage/delete/" + id,
+
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+            alert(data.msg);
+            if (data.msg == 'delete complete') {
+                callback && callback();
+            }
+        },
+        error: function (e) {
+            alert("errorInfo: " + e);
+        }
+    })
+}
+
+function modifyEmployee() {
+
+    alert("modify");
+
 }
