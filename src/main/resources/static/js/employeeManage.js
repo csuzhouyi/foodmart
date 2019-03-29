@@ -152,6 +152,8 @@ function modifyEmployeeModal(id, callback) {
 }
 
 function createEmployeeModal() {
+    document.getElementById("model_employee_id").removeAttribute("value");
+    document.getElementById("model_employee_id").removeAttribute("readonly");
     $('#create_modal').on('show.bs.modal', function (event) {
         var modal = $(this);
         modal.find('.modal-title').text("新增员工");
