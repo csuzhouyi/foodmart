@@ -1,7 +1,5 @@
 package com.practice.foodmart.pojo;
 
-import javax.validation.constraints.NotEmpty;
-
 public class SearchCriteria {
 
     private String employeeId;

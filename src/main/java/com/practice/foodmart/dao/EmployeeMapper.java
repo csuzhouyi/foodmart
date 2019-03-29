@@ -57,9 +57,9 @@ public interface EmployeeMapper {
      * @return
      * @throws Exception
      */
-    @Update("update employee set full_name=#{fullName}, first_name=#{firstName}, last_name=#{lastName}, store_id=#{storeId}, departmentId=#{departmentId}, " +
+    @Update("update employee set full_name=#{fullName}, first_name=#{firstName}, last_name=#{lastName}, store_id=#{storeId}, department_id=#{departmentId}, " +
             "hire_date=#{hireDate}, end_date=#{endDate}, salary=#{salary}, education_level=#{educationLevel}, marital_status=#{maritalStatus}, birth_date=#{birthDate}, " +
-            "gender=#{gender},   where employee_id=#{employeeId}")
+            "gender=#{gender}   where employee_id=#{employeeId}")
     boolean update(Employee employee) throws Exception;
 
     @Select("select count(0) from employee")

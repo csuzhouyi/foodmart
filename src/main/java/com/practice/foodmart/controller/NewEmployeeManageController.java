@@ -7,14 +7,10 @@ import com.practice.foodmart.pojo.SearchCriteria;
 import com.practice.foodmart.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.*;
 import org.thymeleaf.util.ListUtils;
-
 import javax.validation.Valid;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -107,6 +103,33 @@ public class NewEmployeeManageController {
             result.setMsg("ERROR INFO: " + e);
         }
 
+        return ResponseEntity.ok(result);
+    }
+
+    /**
+     * 修改员工信息
+     * @param employee
+     * @return
+     */
+    @PostMapping(value = "update")
+    public ResponseEntity<?> updateEmployee(@Valid @RequestBody Employee employee, Errors errors) {
+        AjaxResponseBody result = new AjaxResponseBody();
+
+        //If error, just return a 400 bad request, along with the error message
+        if (errors.hasErrors()) {
+            result.setMsg(errors.getAllErrors().stream().map(x -> x.getDefaultMessage()).collect(Collectors.joining(",")));
+            return ResponseEntity.badRequest().body(result);
+        }
+
+        try {
+            result.setMsg("success");
+            if (!employeeService.update(employee)) {
+                result.setMsg("fail");
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            result.setMsg("ERROR INFO: " + e);
+        }
         return ResponseEntity.ok(result);
     }
 

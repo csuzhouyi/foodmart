@@ -2,8 +2,6 @@ package com.practice.foodmart.pojo;
 
 import com.github.pagehelper.PageInfo;
 
-import java.util.List;
-
 public class AjaxResponseBody {
 
     String msg;
